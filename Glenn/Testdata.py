@@ -1,5 +1,7 @@
 __author__ = 'Glenn'
 import netifaces
+import socket
+import sys
 
 netifaces.interfaces()
 
