@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Netspector-Gadget.iml" filepath="$PROJECT_DIR$/.idea/Netspector-Gadget.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../School/.idea/School.iml" filepath="$PROJECT_DIR$/../School/.idea/School.iml" />
     </modules>
   </component>
 </project>
