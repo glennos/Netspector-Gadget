@@ -1,4 +1,4 @@
-__author__ = 'GLenn'
+__author__ = 'Glenn'
 import sys
 
 n = 100
