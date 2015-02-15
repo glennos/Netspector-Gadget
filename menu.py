@@ -3,7 +3,7 @@ import sys
 
 from pip._vendor.distlib.compat import raw_input
 
-from lib import get_ipadresses
+from library import get_ipadresses
 from Glenn import connect_socket_test
 
 
