@@ -35,5 +35,3 @@ def sniffer():
                     eth_protocol))
     except KeyboardInterrupt:
         print("End")
-
-print(sniffer())

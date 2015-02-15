@@ -3,7 +3,7 @@ import sys
 
 from pip._vendor.distlib.compat import raw_input
 
-from library import get_ipadresses
+from library import get_ipadresses, network_sniffer
 from Glenn import connect_socket_test
 
 
@@ -14,7 +14,7 @@ while True:
     print(c + h*78 + c)
     print(" "*32 + "1: Toon IP adressen")
     print(" "*32 + "2: Test Socket connectie")
-    print(" "*32 + "3: ")
+    print(" "*32 + "3: Simple Network sniffer")
     print(" "*32 + "4: ")
     print(" "*32 + "0: Afsluiten")
     print()
@@ -25,5 +25,7 @@ while True:
         print(get_ipadresses.show_ipadresses())
     elif optie_input == '2':
         print(connect_socket_test.connect_socket())
+    elif optie_input == '3':
+        print(network_sniffer.sniffer())
     elif optie_input == '0':
         sys.exit(0)
