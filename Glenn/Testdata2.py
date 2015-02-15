@@ -1,4 +1,4 @@
-from struct import unpack
+from struct import *
 import socket
 import sys
 

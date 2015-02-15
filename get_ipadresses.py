@@ -1,15 +1,17 @@
 __author__ = 'Glenn'
 import netifaces
 
-netifaces.interfaces()
+def show_ipadresses():
 
-print("Lijst met interfaces en het IP adress:")
-print()
+    netifaces.interfaces()
 
-for ifaceName in netifaces.interfaces():
-    addresses = [i["addr"] for i in netifaces.ifaddresses(ifaceName).setdefault(netifaces.AF_INET, [{"addr":"Geen IP"}] )]
+    print("Lijst met interfaces en het IP adress:")
+    print()
 
-    print("%s: %s" % (ifaceName, " ".join(addresses)))
+    for ifaceName in netifaces.interfaces():
+        addresses = [i["addr"] for i in netifaces.ifaddresses(ifaceName).setdefault(netifaces.AF_INET, [{"addr":"Geen IP"}] )]
 
-print("")
-print(ifaceName, "", (addresses))
+        print("%s: %s" % (ifaceName, " ".join(addresses)))
+
+    print("")
+    print(ifaceName, "", (addresses))
