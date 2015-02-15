@@ -1,9 +1,11 @@
 __author__ = 'Glenn'
-import curses
-from pip._vendor.distlib.compat import raw_input
-import get_ipadresses
-import Glenn.connect_socket_test
 import sys
+
+from pip._vendor.distlib.compat import raw_input
+
+from lib import get_ipadresses
+from Glenn import connect_socket_test
+
 
 c = "+"
 h = "-"
@@ -22,6 +24,6 @@ while True:
     if optie_input == '1':
         print(get_ipadresses.show_ipadresses())
     elif optie_input == '2':
-        print(Glenn.connect_socket_test.connect_socket())
+        print(connect_socket_test.connect_socket())
     elif optie_input == '0':
         sys.exit(0)
