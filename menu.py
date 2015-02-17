@@ -12,13 +12,13 @@ h = "-"
 
 while True:
     print(c + h*78 + c)
-    print(" "*32 + "1: Toon IP adressen")
-    print(" "*32 + "2: Test Socket connectie")
-    print(" "*32 + "3: Simple Network sniffer")
-    print(" "*32 + "4: ")
-    print(" "*32 + "0: Afsluiten")
+    print(" "*28 + "1: Toon IP adressen")
+    print(" "*28 + "2: Test Socket connectie")
+    print(" "*28 + "3: Simple Network sniffer")
+    print(" "*28 + "4: ")
+    print(" "*28 + "0: Afsluiten")
     print()
-    input = optie_input = raw_input(" "*32 + "Kies een optie: ",)
+    input = optie_input = raw_input(" "*28 + "Kies een optie: ",)
     print(optie_input)
     print(c + h*78 + c)
     if optie_input == '1':
