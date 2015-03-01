@@ -5,6 +5,7 @@ from pip._vendor.distlib.compat import raw_input
 
 from library import get_ipadresses, network_sniffer
 from Glenn import connect_socket_test
+from Bob import menu_Bob
 
 
 c = "+"
@@ -16,6 +17,7 @@ while True:
     print(" "*28 + "2: Test Socket connectie")
     print(" "*28 + "3: Simple Network sniffer")
     print(" "*28 + "4: ")
+    print(" "*28 + "5: Menu Bob")
     print(" "*28 + "0: Afsluiten")
     print()
     input = optie_input = raw_input(" "*28 + "Kies een optie: ",)
@@ -27,5 +29,7 @@ while True:
         print(connect_socket_test.connect_socket())
     elif optie_input == '3':
         print(network_sniffer.sniffer())
+    elif optie_input == '5':
+        print(menu_Bob.menu_bob())
     elif optie_input == '0':
         sys.exit(0)
