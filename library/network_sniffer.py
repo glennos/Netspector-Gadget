@@ -20,7 +20,6 @@ def sniffer():
         # receive a packet
         while True:
             packet = s.recvfrom(65565)
-
             # packet string from tuple
             packet = packet[0]
 
