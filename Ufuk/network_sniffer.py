@@ -46,23 +46,34 @@ def sniffer():
 
                 if ip_version == 4:
                     ip_headerlength = version_ihl & 0xF
-                    # ip_dscp_tos = iph[]
-                    # ip_ecn = iph[]
-                    # ip_id = iph[]
+                    ip_tos = iph[1]
+                    # ip_totallength = iph[]
+                    ip_id = iph[3]
+                    # ip_flags = iph[]
+                    ip_fragment_off = iph[4]
                     ip_ttl = iph[5]
                     ip_protocol = iph[6]
-                    # iph[7] ?
                     ip_s_addr = socket.inet_ntoa(iph[8])
                     ip_d_addr = socket.inet_ntoa(iph[9])
                     # ip_options = iph[]
-                    # ip_totallength = iph[]
-                    # ip_flags = iph[]
-                    # ip_frag_off = iph[]
-                    # ip_headerchecksum = iph[]
+                    ip_headerchecksum = iph[7]
+                    # ip_padding = iph[]
 
-                    print('Version : ' + str(ip_version) + ' IP Header Length : ' + str(ip_headerlength) + ' TTL : '
-                          + str(ip_ttl) + ' Protocol : ' + str(ip_protocol) + ' Source Address : ' + str(ip_s_addr)
-                          + ' Destination Address : ' + str(ip_d_addr))
+                    print('Version : ' + str(ip_version)
+                          + ' IP Header Length : ' + str(ip_headerlength)
+                          + ' Type of Service : ' + str(ip_tos)
+                          # + ' Total length : ' + str(ip_totallength)
+                          + ' ID : ' + str(ip_id)
+                          # + ' Flags : ' + str(ip_flags)
+                          + ' Fragment Offset : ' + str(ip_fragment_off)
+                          + ' TTL : ' + str(ip_ttl)
+                          + ' Protocol : ' + str(ip_protocol)
+                          + ' Header Checksum : ' + str(ip_headerchecksum)
+                          + ' Source Address : ' + str(ip_s_addr)
+                          + ' Destination Address : ' + str(ip_d_addr)
+                          # + ' Options : ' + str(ip_options)
+                          # + ' Padding : ' + str(ip_padding)
+                          )
 
                 elif ip_version == 6:
                     ip_trafficclass = iph[1]
