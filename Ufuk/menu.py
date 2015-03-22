@@ -3,10 +3,7 @@ import sys
 
 from pip._vendor.distlib.compat import raw_input
 
-from library import get_ipadresses
 from Ufuk import network_sniffer
-from Glenn import connect_socket_test
-
 
 c = "+"
 h = "-"

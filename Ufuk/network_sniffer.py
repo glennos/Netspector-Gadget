@@ -31,7 +31,8 @@ def sniffer():
             eth_header = packet[:eth_length]
             eth = unpack('!6s6sH', eth_header)
             eth_protocol = socket.ntohs(eth[2])
-            print('\nDestination MAC : ' + eth_addr(packet[0:6]) + ' Source MAC : ' + eth_addr(packet[6:12]) + ' Protocol : ' + str(eth_protocol))
+            print('\n###ETHERNET PACKET###'
+                  '\nDestination MAC : ' + eth_addr(packet[0:6]) + ' Source MAC : ' + eth_addr(packet[6:12]) + ' Protocol : ' + str(eth_protocol))
 
             # Parse IP packets, IP Protocol number = 8
             if eth_protocol is not None:
@@ -41,34 +42,51 @@ def sniffer():
 
                 # now unpack them
                 iph = unpack('!BBHHHBBH4s4s', ip_header)
+
+                # To the the ip version we have to shift the first element 4 bits right. Because in the first element
+                # is stored the ip version and the header lenght in this way first four bits are ip version
+                # and the last 4 bites are the header lenght
                 version_ihl = iph[0]
                 ip_version = version_ihl >> 4
 
                 if ip_version == 4:
-                    ip_headerlength = version_ihl & 0xF
+
+                    # Now to get the header lenght we use "and" operation to make the
+                    # Ip versional bits equal to zero, in order to the desired data
+                    ip_headerlength = version_ihl & 0xF  # 0xF is 15
                     ip_tos = iph[1]
-                    # ip_totallength = iph[]
+                    ip_tot_len = iph[2]
                     ip_id = iph[3]
-                    # ip_flags = iph[]
-                    ip_fragment_off = iph[4]
+
+                    # The "Flags" and Fragment Offset are situated in a single
+                    # element from the forth element of the tuple.
+                    # Flag is 3 bits (Most significant), so we make "and" with 1110 0000 0000 0000(=0xE000)
+                    # to leave 3 most significant bits and then shift them right 13 positions
+                    ip_flags = iph[4] & 0xE000 >> 13
+                    ip_frag_off = iph[4] & 0x3f28cb7157158 >> 3  # Zelf berekend: 1111111111111000(=0x3f28cb7157158)
+
+                    # The next elements
                     ip_ttl = iph[5]
-                    ip_protocol = iph[6]
+                    ip_proto = iph[6]
+                    ip_checksum = iph[7]
                     ip_s_addr = socket.inet_ntoa(iph[8])
                     ip_d_addr = socket.inet_ntoa(iph[9])
+
+                    # Options en padding zijn niet altijd aanwezig, hoe te extracten??
                     # ip_options = iph[]
-                    ip_headerchecksum = iph[7]
                     # ip_padding = iph[]
 
-                    print('Version : ' + str(ip_version)
+                    print('\n###IPv4 PACKET###'
+                          '\nVersion : ' + str(ip_version)
                           + ' IP Header Length : ' + str(ip_headerlength)
                           + ' Type of Service : ' + str(ip_tos)
-                          # + ' Total length : ' + str(ip_totallength)
+                          + ' Total length : ' + str(ip_tot_len)
                           + ' ID : ' + str(ip_id)
-                          # + ' Flags : ' + str(ip_flags)
-                          + ' Fragment Offset : ' + str(ip_fragment_off)
+                          + ' Flags : ' + str(ip_flags)
+                          + ' Fragment Offset : ' + str(ip_frag_off)
                           + ' TTL : ' + str(ip_ttl)
-                          + ' Protocol : ' + str(ip_protocol)
-                          + ' Header Checksum : ' + str(ip_headerchecksum)
+                          + ' Protocol : ' + str(ip_proto)
+                          + ' \nHeader Checksum : ' + str(ip_checksum)
                           + ' Source Address : ' + str(ip_s_addr)
                           + ' Destination Address : ' + str(ip_d_addr)
                           # + ' Options : ' + str(ip_options)
@@ -84,10 +102,16 @@ def sniffer():
                     ip_s_addr = iph[6]
                     ip_d_addr = iph[7]
 
-                    print('Version : ' + str(ip_version) + ' Traffic Class ' + str(ip_trafficclass) + ' Flow Label : '
-                          + str(ip_flowlabel) + ' Payload Length : ' + str(ip_payloadlength) + ' Next Header : '
-                          + str(ip_nextheader) + ' Hop Limit : ' + str(ip_hoplimit) + ' Source Address : '
-                          + str(ip_s_addr) + ' Destination Address : ' + str(ip_d_addr))
+                    print('\n###IPv6 PACKET###'
+                          '\nVersion : ' + str(ip_version)
+                          + ' Traffic Class ' + str(ip_trafficclass)
+                          + ' Flow Label : ' + str(ip_flowlabel)
+                          + ' Payload Length : ' + str(ip_payloadlength)
+                          + ' Next Header : ' + str(ip_nextheader)
+                          + ' Hop Limit : ' + str(ip_hoplimit)
+                          + ' Source Address : ' + str(ip_s_addr)
+                          + ' Destination Address : ' + str(ip_d_addr)
+                          )
 
     except KeyboardInterrupt:
         print("End")
