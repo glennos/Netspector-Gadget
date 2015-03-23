@@ -1,12 +1,11 @@
+#!/usr/bin/env python
 __author__ = 'root'
 
-# Packet sniffer in python for Linux
-# Sniffs only incoming TCP packet
 
 import socket, sys
 from struct import *
 
-def sniffer_Bob():
+def sniffer():
     try:
         # create an INET, STREAMing socket
         try:
@@ -55,7 +54,7 @@ def sniffer_Bob():
 
 
             print('Source Port \t\t: ' + str(source_port))
-            print('Dest Port \t\t\t: ' + str(dest_port))
+            print('Dest Port \t\t: ' + str(dest_port))
             print('Sequence Number \t: ' + str(sequence))
             print('Acknowledgement \t: ' + str(acknowledgement))
             print('TCP header length \t: ' + str(tcph_length))
@@ -67,8 +66,20 @@ def sniffer_Bob():
             data = str(packet[h_size:])
 
             if data != """b''""":
-                print('Data \t\t\t\t: ' + data)
+                print('Data \t\t\t: ' + data)
 
             print("\n")
     except KeyboardInterrupt:
         print("End")
+
+s = socket.socket()
+host = "localhost"
+port = 12345
+s.bind((host, port))
+
+s.listen(5)
+while True:
+    c, addr = s.accept()
+    print('Got connection from', addr)
+    c.send(sniffer())
+    c.close()
