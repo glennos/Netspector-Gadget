@@ -65,21 +65,25 @@ def sniffer():
             # get data from the packet
             data = str(packet[h_size:])
 
-            if data != """b''""":
+            if data:
                 print('Data \t\t\t: ' + data)
 
             print("\n")
     except KeyboardInterrupt:
         print("End")
 
-s = socket.socket()
-host = "localhost"
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+host = socket.gethostname()
 port = 12345
 s.bind((host, port))
 
 s.listen(5)
 while True:
-    c, addr = s.accept()
-    print('Got connection from', addr)
-    c.send(sniffer())
-    c.close()
+    try:
+        c, addr = s.accept()
+        print('Got connection from', addr)
+        file = s.makefile(sniffer())
+        c.sendall(file)
+    finally:
+        c.close()
