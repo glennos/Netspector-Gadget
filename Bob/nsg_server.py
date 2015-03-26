@@ -5,7 +5,7 @@ __author__ = 'root'
 import socket, sys
 from struct import *
 
-def sniffer():
+def sniffer(remote):
     try:
         # create an INET, STREAMing socket
         try:
@@ -53,7 +53,7 @@ def sniffer():
             tcph_length = doff_reserved >> 4
 
 
-            print('Source Port \t\t: ' + str(source_port))
+            remote.send('Source Port \t\t: ' + str(source_port))
             print('Dest Port \t\t: ' + str(dest_port))
             print('Sequence Number \t: ' + str(sequence))
             print('Acknowledgement \t: ' + str(acknowledgement))
@@ -83,7 +83,8 @@ while True:
     try:
         c, addr = s.accept()
         print('Got connection from', addr)
-        file = s.makefile(sniffer())
-        c.sendall(file)
+        sniffer(c)
+        # snif.encode('')
+        # c.sendall(file)
     finally:
         c.close()
