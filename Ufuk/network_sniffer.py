@@ -3,7 +3,7 @@ import socket
 import sys
 
 
-def sniffer():
+def sniffer(remote):
     try:
         def eth_addr(a):
             b = "%.2x:%.2x:%.2x:%.2x:%.2x:%.2x" % (a[0], a[1], a[2], a[3], a[4], a[5])
@@ -76,7 +76,7 @@ def sniffer():
                     # ip_options = iph[]
                     # ip_padding = iph[]
 
-                    print('\n###IPv4 PACKET###'
+                    data = ('\n###IPv4 PACKET###'
                           '\nVersion : ' + str(ip_version)
                           + ' IP Header Length : ' + str(ip_headerlength)
                           + ' Type of Service : ' + str(ip_tos)
@@ -92,6 +92,8 @@ def sniffer():
                           # + ' Options : ' + str(ip_options)
                           # + ' Padding : ' + str(ip_padding)
                           )
+                    print(data)
+                    remote.send(data.encode('utf-8'))
 
                 elif ip_version == 6:
                     ip_trafficclass = iph[1]
