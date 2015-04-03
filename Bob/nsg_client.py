@@ -39,12 +39,12 @@ def sniffer(packet):
     # get data from the packet
     data = str(packet[h_size:])
 
-    tcppacket = ('Source Port \t\t: ' + str(source_port)
-                 + 'Dest Port \t\t: ' + str(dest_port)
-                 + 'Sequence Number \t: ' + str(sequence)
-                 + 'Acknowledgement \t: ' + str(acknowledgement)
-                 + 'TCP header length \t: ' + str(tcph_length)
-                 + 'Data \t\t\t: ' + data
+    tcppacket = ('Source Port : ' + str(source_port)
+                 + '\tDest Port : ' + str(dest_port)
+                 + '\tSequence Number : ' + str(sequence)
+                 + '\tAcknowledgement : ' + str(acknowledgement)
+                 + '\tIp header length : ' + str(tcph_length)
+                 + '\tData : ' + data[0:20]
                  )
     print(tcppacket)
 
@@ -52,19 +52,13 @@ def sniffer(packet):
 s = socket.socket()
 
 try:
-    host = socket.gethostname()
+    host = '192.168.0.108'
     port = 12345
     s.connect((host, port))
 
     while True:
-            packets = s.recv(65565)
+        packets = s.recv(65565)
+        if packets:
             sniffer(packets)
 finally:
     s.close()
-
-
-
-
-
-
-

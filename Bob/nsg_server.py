@@ -15,27 +15,29 @@ def sniffer(remote):
         sys.exit()
 
     # receive a packet
-    while True:
-        packet = so.recvfrom(65565)
+    packet = so.recvfrom(65565)
 
-        # packet string from tuple
-        packet = packet[0]
+    # create string
+    packet = packet[0]
 
-        remote.send(packet)
+    remote.send(packet)
 
 s = socket.socket()
 s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
 try:
-    host = socket.gethostname()
+    host = '0.0.0.0'
     port = 12345
     s.bind((host, port))
 
     s.listen(5)
     c, addr = s.accept()
+    print('Got connection from', addr)
 
     while True:
-        print('Got connection from', addr)
         sniffer(c)
+except KeyboardInterrupt:
+    s.close()
 finally:
+    s.shutdown(1)
     s.close()
