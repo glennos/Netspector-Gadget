@@ -5,7 +5,7 @@ import socket, sys
 from struct import *
 
 
-def sniffer(packet):
+def snifandformat(packet):
 
     # take first 20 characters for the ip header
     ip_header = packet[0:20]
@@ -59,6 +59,6 @@ try:
     while True:
         packets = s.recv(65565)
         if packets:
-            sniffer(packets)
+            snifandformat(packets)
 finally:
     s.close()
