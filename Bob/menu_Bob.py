@@ -3,6 +3,7 @@ __author__ = 'Bob'
 import sys
 
 from Bob import Sniffer_Bob, Sniffer2_Bob, Sniffer3_Bob
+from pip._vendor.distlib.compat import raw_input
 
 c = "+"
 h = "-"

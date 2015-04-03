@@ -55,7 +55,7 @@ def sniffer_Bob():
 
 
             print('Source Port \t\t: ' + str(source_port))
-            print('Dest Port \t\t\t: ' + str(dest_port))
+            print('Dest Port \t\t: ' + str(dest_port))
             print('Sequence Number \t: ' + str(sequence))
             print('Acknowledgement \t: ' + str(acknowledgement))
             print('TCP header length \t: ' + str(tcph_length))
@@ -72,3 +72,7 @@ def sniffer_Bob():
             print("\n")
     except KeyboardInterrupt:
         print("End")
+
+def writetofile():
+    fo = open("foo.txt" "wb")
+    fo.write("")
