@@ -40,11 +40,11 @@ def sniffer(packet, user_dest_port):
     # data = str(packet[h_size:])
 
     if dest_port != user_dest_port:
-        tcppacket = ('Source Port : ' + str(source_port)
-                     + '\tDest Port : ' + str(dest_port)
-                     + '\tSequence Number : ' + str(sequence)
-                     + '\tAcknowledgement : ' + str(acknowledgement)
-                     + '\tIp header length : ' + str(tcph_length)
+        tcppacket = ('IP: ' + str(s_addr)
+                    + '\tD-IP: ' + str(d_addr)
+                    + '\tProt: ' + str(protocol)
+                    + '\tIp header length: ' + str(tcph_length)
+                    + '\tInfo: ' + str(source_port) + ' ' + str(dest_port)
                      )
         print(tcppacket)
 

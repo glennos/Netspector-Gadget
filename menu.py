@@ -3,13 +3,15 @@ import sys
 
 from pip._vendor.distlib.compat import raw_input
 
-from library import get_ipadresses, network_sniffer
+from library import network_sniffer
 from Glenn import connect_socket_test
 from Bob import menu_Bob, nsg_client, nsg_server
 
 
 c = "+"
 h = "-"
+
+x = True
 
 print(c + h*86 + c)
 print("""|      __     _                       _                 ___          _            _    |
@@ -36,7 +38,7 @@ while True:
     print(optie_input)
     print(c + h*86 + c)
     if optie_input == '1':
-        print(get_ipadresses.show_ipadresses())
+        print("hoi")
     elif optie_input == '2':
         print(connect_socket_test.connect_socket())
     elif optie_input == '3':
@@ -44,8 +46,13 @@ while True:
     elif optie_input == '5':
         print(menu_Bob.menu_bob())
     elif optie_input == '6':
-        print(nsg_server.server())
+        while x is True:
+            try:
+                print(nsg_server.server())
+            except KeyboardInterrupt:
+                break
     elif optie_input == '7':
-        print(nsg_client.client())
+        while True:
+            print(nsg_client.client())
     elif optie_input == '0':
         sys.exit(0)
