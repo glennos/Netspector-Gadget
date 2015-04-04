@@ -5,45 +5,39 @@ __author__ = 'root'
 import socket, sys
 from struct import *
 
-def sniffer():
+
+def sendrawdatasocket(remote):
+    # create an INET, STREAMing socket
     try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        so = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_TCP)
     except socket.error as msg:
         print('Socket could not be created. Error Code : ' + str(msg[0]) + ' Message ' + msg[1])
         sys.exit()
 
-    host = socket.gethostname()
+    # receive a packet
+    packet = so.recvfrom(65565)
+
+    # create string
+    packet = packet[0]
+
+    remote.send(packet)
+
+s = socket.socket()
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
+try:
+    host = '0.0.0.0'
     port = 12345
     s.bind((host, port))
 
     s.listen(5)
+    c, addr = s.accept()
+    print('Got connection from', addr)
 
-    while 1:
-        try:
-            c, addr = s.accept()
-            print('Got connection from', addr)
-
-            # create an INET, STREAMing socket
-            try:
-                so = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_TCP)
-            except socket.error as msg:
-                print('Socket could not be created. Error Code : ' + str(msg[0]) + ' Message ' + msg[1])
-                sys.exit()
-            while 1:
-                packet = so.recvfrom(65565)
-                # packet string from tuple
-                packet = packet[0]
-                if packet:
-                    c.send(packet)
-        except socket.error:
-            break
-        except KeyboardInterrupt:
-            s.close()
-            break
-
-while 1:
-    try:
-        sniffer()
-    except socket.error:
-        break
-
+    while True:
+        sendrawdatasocket(c)
+except KeyboardInterrupt:
+    s.close()
+finally:
+    s.shutdown(1)
+    s.close()
