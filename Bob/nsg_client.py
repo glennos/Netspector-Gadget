@@ -5,7 +5,7 @@ import socket, sys
 from struct import *
 
 
-def snifandformat(packet):
+def sniffer(packet, user_dest_port):
 
     # take first 20 characters for the ip header
     ip_header = packet[0:20]
@@ -19,8 +19,8 @@ def snifandformat(packet):
     iph_length = ihl * 4
     ttl = iph[5]
     protocol = iph[6]
-    s_addr = socket.inet_ntoa(iph[8])
-    d_addr = socket.inet_ntoa(iph[9])
+    s_addr = socket.inet_ntoa(iph[8]);
+    d_addr = socket.inet_ntoa(iph[9]);
     tcp_header = packet[iph_length:iph_length+20]
 
     # now unpack them :)
@@ -39,15 +39,15 @@ def snifandformat(packet):
     # get data from the packet
     data = str(packet[h_size:])
 
-    tcppacket = ('Source Port : ' + str(source_port)
-                 + '\tDest Port : ' + str(dest_port)
-                 + '\tSequence Number : ' + str(sequence)
-                 + '\tAcknowledgement : ' + str(acknowledgement)
-                 + '\tIp header length : ' + str(tcph_length)
-                 + '\tData : ' + data[0:20]
-                 )
-    print(tcppacket)
-
+    if dest_port != user_dest_port:
+        tcppacket = ('Source Port : ' + str(source_port)
+                     + '\tDest Port : ' + str(dest_port)
+                     + '\tSequence Number : ' + str(sequence)
+                     + '\tAcknowledgement : ' + str(acknowledgement)
+                     + '\tIp header length : ' + str(tcph_length)
+                     + '\tData : ' + data[0:20]
+                     )
+        print(tcppacket)
 
 s = socket.socket()
 
@@ -59,6 +59,6 @@ try:
     while True:
         packets = s.recv(65565)
         if packets:
-            snifandformat(packets)
+            sniffer(packets, port)
 finally:
     s.close()

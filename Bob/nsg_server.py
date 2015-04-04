@@ -6,7 +6,7 @@ import socket, sys
 from struct import *
 
 
-def sendrawdatasocket(remote):
+def sniffer(remote):
     # create an INET, STREAMing socket
     try:
         so = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_TCP)
@@ -20,7 +20,8 @@ def sendrawdatasocket(remote):
     # create string
     packet = packet[0]
 
-    remote.send(packet)
+    if packet:
+        remote.send(packet)
 
 s = socket.socket()
 s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -35,7 +36,7 @@ try:
     print('Got connection from', addr)
 
     while True:
-        sendrawdatasocket(c)
+        sniffer(c)
 except KeyboardInterrupt:
     s.close()
 finally:
