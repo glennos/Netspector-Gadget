@@ -46,11 +46,7 @@ while True:
     elif optie_input == '5':
         menu_Bob.menu_bob()
     elif optie_input == '6':
-        while x is True:
-            try:
-                nsg_server.server()
-            except KeyboardInterrupt:
-                break
+        nsg_server.server()
     elif optie_input == '7':
         while True:
             nsg_client.client()

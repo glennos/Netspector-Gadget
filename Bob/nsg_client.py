@@ -51,15 +51,19 @@ def sniffer(packet, user_dest_port):
 
 def client():
     s = socket.socket()
+    x = True
+    while x is True:
+        try:
+            host = input("Geef ip adres op (zoals 192.168.0.1): ")
+            port = 12345
+            s.connect((host, port))
 
-    try:
-        host = input("Geef ip adres op (zoals 192.168.0.1): ")
-        port = 12345
-        s.connect((host, port))
-
-        while True:
-            packets = s.recv(65565)
-            if packets:
-                sniffer(packets, port)
-    finally:
-        s.close()
+            while True:
+                packets = s.recv(65565)
+                if packets:
+                    sniffer(packets, port)
+        except KeyboardInterrupt:
+            x = False
+            return False
+        finally:
+            s.close()
