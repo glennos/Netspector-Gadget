@@ -8,15 +8,19 @@ from pip._vendor.distlib.compat import raw_input
 
 def localclient():
     s = socket.socket()
-    host = socket.gethostname()
-    port = 12345
-    s.connect((host, port))
-
     try:
+        host = socket.gethostname()
+        port = 12345
+        s.connect((host, port))
+
         packet = s.recv(1024)
-        while packet is True:
-            print(s.recv(1024))
+
+        while packet() is True:
+            s.send(packet.decode('utf-8'))
     except KeyboardInterrupt:
+        s.close()
+    finally:
+        s.shutdown(1)
         s.close()
 
 
