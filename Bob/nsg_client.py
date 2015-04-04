@@ -19,8 +19,8 @@ def snifandformat(packet):
     iph_length = ihl * 4
     ttl = iph[5]
     protocol = iph[6]
-    s_addr = socket.inet_ntoa(iph[8]);
-    d_addr = socket.inet_ntoa(iph[9]);
+    s_addr = socket.inet_ntoa(iph[8])
+    d_addr = socket.inet_ntoa(iph[9])
     tcp_header = packet[iph_length:iph_length+20]
 
     # now unpack them :)
