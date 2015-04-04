@@ -5,25 +5,29 @@ import sys
 from Ufuk import nsg_server_switch
 from pip._vendor.distlib.compat import raw_input
 
-def startServer():
+
+def localclient():
     s = socket.socket()
     host = socket.gethostname()
     port = 12345
-    s.bind((host, port))
+    s.connect((host, port))
 
-    s.listen(5)
-    while True:
-        conn, addr = s.accept()
-        print("Got connection from", addr)
-        conn.send("Connection Established!".encode('utf-8'))
+    try:
+        packet = s.recv(1024)
+        while packet is True:
+            print(s.recv(1024))
+    except KeyboardInterrupt:
+        s.close()
 
-        while True:
-            packet = ""
-            data = conn.recv(1024)
-            for packet in data:
-                print(packet)
-            else:
-                print("No more packets!")
+
+def remoteclient():
+    host = raw_input(" "*28 + "Please give the IP address of the remote client :  ",)
+    print(host)
+    port = raw_input(" "*28 + "Please give the Port address of the socket :  ",)
+    print(port)
+
+    s = socket.socket()
+    s.connect(host, port)
 
 c = "+"
 h = "-"
@@ -40,7 +44,7 @@ while True:
     print(optie_input)
     print(c + h*78 + c)
     if optie_input == '1':
-        startServer()
+        nsg_server_switch()
     if optie_input == '2':
         print()
     if optie_input == '3':

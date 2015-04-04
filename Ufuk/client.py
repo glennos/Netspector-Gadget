@@ -3,7 +3,7 @@ __author__ = 'Ufuk'
 import socket
 import sys
 from pip._vendor.distlib.compat import raw_input
-import network_sniffer
+from Ufuk import network_sniffer
 
 
 def localclient():
@@ -42,18 +42,10 @@ while True:
     print(optie_input)
     print(c + h*78 + c)
     if optie_input == '1':
-        print(localclient())
+        localclient()
     if optie_input == '2':
-        print(remoteclient())
+        remoteclient()
     if optie_input == '3':
         print()
     elif optie_input == '0':
         sys.exit(0)
-
-# s = socket.socket()
-# host = socket.gethostname()
-# port = 12345
-
-# s.connect((host, port))
-# print(s.recv(1024))
-# s.close

@@ -4,8 +4,8 @@ import sys
 from pip._vendor.distlib.compat import raw_input
 
 from Ufuk import network_sniffer
-from Ufuk import server
-from Ufuk import client
+from Ufuk import nsg_server_switch
+from Ufuk import nsg_client_prime
 
 c = "+"
 h = "-"
@@ -22,10 +22,10 @@ while True:
     print(optie_input)
     print(c + h*78 + c)
     if optie_input == '1':
-        print(network_sniffer.sniffer())
+        network_sniffer.sniffer()
     if optie_input == '2':
-        print(server())
+        nsg_server_switch()
     if optie_input == '3':
-        print(client())
+        nsg_client_prime()
     elif optie_input == '0':
         sys.exit(0)
