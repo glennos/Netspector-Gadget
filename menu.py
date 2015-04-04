@@ -40,19 +40,19 @@ while True:
     if optie_input == '1':
         print("hoi")
     elif optie_input == '2':
-        (connect_socket_test.connect_socket())
+        connect_socket_test.connect_socket()
     elif optie_input == '3':
-        (network_sniffer.sniffer())
+        network_sniffer.sniffer()
     elif optie_input == '5':
-        (menu_Bob.menu_bob())
+        menu_Bob.menu_bob()
     elif optie_input == '6':
         while x is True:
             try:
-                (nsg_server.server())
+                nsg_server.server()
             except KeyboardInterrupt:
                 break
     elif optie_input == '7':
         while True:
-            (nsg_client.client())
+            nsg_client.client()
     elif optie_input == '0':
         sys.exit(0)
