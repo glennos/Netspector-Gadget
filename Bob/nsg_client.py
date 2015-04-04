@@ -53,7 +53,7 @@ def client():
     s = socket.socket()
 
     try:
-        host = '192.168.0.116'
+        host = input("Geef ip adres op (zoals 192.168.0.1): ")
         port = 12345
         s.connect((host, port))
 
