@@ -5,7 +5,7 @@ from pip._vendor.distlib.compat import raw_input
 
 from library import get_ipadresses, network_sniffer
 from Glenn import connect_socket_test
-from Bob import menu_Bob
+from Bob import menu_Bob, nsg_client, nsg_server
 
 
 c = "+"
@@ -27,9 +27,12 @@ while True:
     print(" "*28 + "3: Simple Network sniffer")
     print(" "*28 + "4: ")
     print(" "*28 + "5: Menu Bob")
+    print(" "*28 + "6: Start server")
+    print(" "*28 + "7: Start sniffer")
+
     print(" "*28 + "0: Afsluiten")
     print()
-    input = optie_input = raw_input(" "*28 + "Kies een optie: ",)
+    optie_input = raw_input(" "*28 + "Kies een optie: ",)
     print(optie_input)
     print(c + h*86 + c)
     if optie_input == '1':
@@ -40,5 +43,9 @@ while True:
         print(network_sniffer.sniffer())
     elif optie_input == '5':
         print(menu_Bob.menu_bob())
+    elif optie_input == '6':
+        print(nsg_server.server())
+    elif optie_input == '7':
+        print(nsg_client.client())
     elif optie_input == '0':
         sys.exit(0)

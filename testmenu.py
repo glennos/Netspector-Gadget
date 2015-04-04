@@ -32,7 +32,6 @@ screen.addstr(10, 1, """|  / /_\/ _` |/ _` |/ _` |/ _ \ __|                     
 screen.addstr(11, 1, """| / /_\\\ (_| | (_| | (_| |  __/ |_                                               |""")
 screen.addstr(12, 1, """| \____/\__,_|\__,_|\__, |\___|\__|                                              |""")
 screen.addstr(13, 1, """|                   |___/                                                        |""")
-screen.addstr(14, 1, c + h * 80 + c)
 
 screen.addstr(16, 1, "1: Toon IP adressen")
 screen.addstr(17, 1, "2: Test Socket connectie")
@@ -43,11 +42,11 @@ screen.addstr(21, 1, "0: Afsluiten")
 screen.refresh()
 
 act_on_input(screen, {ESC: quit,
-                             "1": live,
-                             "2": history,
-                             "3": connect,
-                             "4": agent,
-                             "5": bunny})
+                             "1": 1,
+                             "2": 2,
+                             "3": 3,
+                             "4": 4,
+                             "5": 5})
 
 
 
