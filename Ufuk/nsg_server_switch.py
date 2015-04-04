@@ -7,22 +7,30 @@ from pip._vendor.distlib.compat import raw_input
 
 
 def startsniffer():
-    s = socket.socket()
-    host = socket.gethostname()
-    port = 12345
-    s.bind((host, port))
-    s.listen(5)
-
-    conn, addr = s.accept()
-    print("Got connection from", addr)
-    conn.send("Connection Established!".encode('utf-8'))
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_IP)
+    except socket.error as msg:
+        print('Socket could not be created. Error Code : ' + str(msg[0]) + ' Message ' + msg[1])
+        sys.exit()
 
     try:
+        host = socket.gethostname()
+        port = 12345
+        s.bind((host, port))
+
+        s.listen(5)
+        connection, address = s.accept()
+        print("Got connection from", address)
+        connection.send("Connection Established!".encode('utf-8'))
+
         network_sniffer.sniffer(s)
         while network_sniffer.sniffer(s) is True:
             for packet in network_sniffer.sniffer(s):
-                conn.send(packet)
+                connection.send(packet.encode('utf-8'))
     except KeyboardInterrupt:
+        s.close()
+    finally:
+        s.shutdown(1)
         s.close()
 
 c = "+"
