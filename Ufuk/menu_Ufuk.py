@@ -21,7 +21,7 @@ def menu_ufuk():
         print(optie_input)
         print(c + h*78 + c)
         if optie_input == '1':
-            nsg_server.server()
+            nsg_server.menu_server()
         if optie_input == '2':
             nsg_client.client()
         elif optie_input == '0':

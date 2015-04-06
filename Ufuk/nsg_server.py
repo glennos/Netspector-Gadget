@@ -88,7 +88,15 @@ def writeorreadfile(sniffer, file, mode):
     file.close()
 
 
-def readhistory():
+def readfile(file, mode):
+    filepath = ('History/{0}').format(file)
+    if mode == 'r':
+        file = open(filepath, mode)
+        for line in file:
+            print(line)
+
+
+def listhistory():
     for file in os.listdir("History/"):
         print(file)
 
@@ -109,7 +117,7 @@ def history():
         print(optie_input)
         print(c + h*86 + c)
         if optie_input == '1':
-            readhistory()
+            listhistory()
         elif optie_input == '2':
             print("")
         elif optie_input == '0':
@@ -146,5 +154,28 @@ def server():
         finally:
             s.close()
 
+c = "+"
+h = "-"
 
 
+def menu_server():
+    while True:
+        print(c + h*78 + c)
+        print(" "*28 + "1: Start Server")
+        print(" "*28 + "2: List all History")
+        print(" "*28 + "3: Read a History File")
+        print(" "*28 + "4: ")
+        print(" "*28 + "0: Afsluiten")
+        print()
+        optie_input = raw_input(" "*28 + "Kies een optie: ",)
+        print(optie_input)
+        print(c + h*78 + c)
+        if optie_input == '1':
+            server()
+        if optie_input == '2':
+            listhistory()
+        if optie_input == '3':
+            host = input("Geef de bestandsnaam op (zoals 192.168.0.108_52325): ")
+            readfile(host, 'r')
+        elif optie_input == '0':
+            sys.exit(0)
