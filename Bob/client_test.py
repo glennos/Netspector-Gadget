@@ -65,5 +65,8 @@ def client():
                     sniffer(packets, port)
         except KeyboardInterrupt:
             print('\nConnection Closed to', host, '\n')
+            x = False
+            return x
         finally:
+            s.shutdown(socket.SHUT_RDWR)
             s.close()
