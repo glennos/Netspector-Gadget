@@ -1,11 +1,6 @@
 #!/usr/bin/env python
-import sys
 import curses
-from pip._vendor.distlib.compat import raw_input
 
-from library import get_ipadresses, network_sniffer
-from Glenn import connect_socket_test
-from Bob import menu_Bob
 from Glenn import act_on_input
 
 
