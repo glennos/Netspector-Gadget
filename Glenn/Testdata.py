@@ -1,9 +1,20 @@
-__author__ = 'Glenn'
-import netifaces
-import socket
-import sys
+import socketserver
 
-netifaces.interfaces()
+class service(socketserver.BaseRequestHandler):
+    def handle(self):
+        data = 'dummy'
+        print("Client connected with ", self.client_address)
+        while len(data):
+            data = self.request.recv(1024)
+            self.request.send(data)
 
-addrs = netifaces.ifaddresses('en0')
-print(addrs[netifaces.AF_INET])
+        print("Client exited")
+        self.request.close()
+
+
+class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
+    pass
+
+
+t = ThreadedTCPServer(('', 12345), service)
+t.serve_forever()

@@ -52,6 +52,6 @@ while True:
     elif optie_input == '6':
         nsg_server.server()
     elif optie_input == '7':
-        nsg_client.client()
+            nsg_client.client()
     elif optie_input == '0':
         sys.exit(0)
