@@ -11,7 +11,7 @@ def sniffer(packet, user_dest_port):
     ip_header = packet[0:20]
 
     # now unpack them :)
-    iph = unpack('!BBHHHBBH4s4s' , ip_header)
+    iph = unpack('!BBHHHBBH4s4s', ip_header)
 
     version_ihl = iph[0]
     version = version_ihl >> 4
@@ -19,12 +19,12 @@ def sniffer(packet, user_dest_port):
     iph_length = ihl * 4
     ttl = iph[5]
     protocol = iph[6]
-    s_addr = socket.inet_ntoa(iph[8]);
-    d_addr = socket.inet_ntoa(iph[9]);
+    s_addr = socket.inet_ntoa(iph[8])
+    d_addr = socket.inet_ntoa(iph[9])
     tcp_header = packet[iph_length:iph_length+20]
 
     # now unpack them :)
-    tcph = unpack('!HHLLBBHHH' , tcp_header)
+    tcph = unpack('!HHLLBBHHH', tcp_header)
 
     source_port = tcph[0]
     dest_port = tcph[1]
@@ -37,51 +37,33 @@ def sniffer(packet, user_dest_port):
     data_size = len(packet) - h_size
 
     # get data from the packet
-    data = str(packet[h_size:])
+    # data = str(packet[h_size:])
 
-    # file = open('client_history', 'a')
     if dest_port != user_dest_port:
-        tcppacket = (''
-                     + 'Source Port : ' + str(source_port)
-                     + '\tDest Port : ' + str(dest_port)
-                     + '\tSequence Number : ' + str(sequence)
-                     + '\tAcknowledgement : ' + str(acknowledgement)
-                     + '\tIp header length : ' + str(tcph_length)
-                     + '\tData : ' + data[0:20] + '\n'
+        tcppacket = ('IP: ' + str(s_addr)
+                    + '\tD-IP: ' + str(d_addr)
+                    + '\tProt: ' + str(protocol)
+                    + '\tIp header length: ' + str(tcph_length)
+                    + '\tInfo: ' + 'SP:' + str(source_port) + ' DP:' + str(dest_port)
                      )
         print(tcppacket)
-        # file.write(tcppacket)
-        writetofile(tcppacket, 'client_history', 'a')
 
 
-def writetofile(sniffer, file, mode):
-    # w = write and replace file content
-    # a = append
-    # r = read
-    # r+ = read and write
-    if mode == 'w':
-        file = open(file, mode)
-        file.write(sniffer)
-    elif mode == 'a':
-        file = open(file, mode)
-        file.write(sniffer)
-    elif mode == 'r':
-        file = open(file, mode)
-        file.read()
-    # elif mode == 'r+':
-    #     file = open(file, mode)
+def client():
+    x = True
+    while x is True:
+        try:
+            s = socket.socket()
 
+            host = input("Geef ip adres op (zoals 192.168.0.1): ")
+            port = 12345
+            s.connect((host, port))
 
-s = socket.socket()
-
-try:
-    host = socket.gethostname()
-    port = 12345
-    s.connect((host, port))
-
-    while True:
-        packets = s.recv(65565)
-        if packets:
-            sniffer(packets, port)
-finally:
-    s.close()
+            while True:
+                packets = s.recv(65565)
+                if packets:
+                    sniffer(packets, port)
+        except KeyboardInterrupt:
+            print('\nConnection Closed to', host, '\n')
+        finally:
+            s.close()

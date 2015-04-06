@@ -7,7 +7,7 @@ from pip._vendor.distlib.compat import raw_input
 from library import network_sniffer, nsg_server, nsg_client
 from Glenn import connect_socket_test
 from Bob import menu_Bob
-
+from Ufuk import menu_Ufuk
 
 c = "+"
 h = "-"
@@ -32,6 +32,8 @@ while True:
     print(" "*28 + "5: Menu Bob")
     print(" "*28 + "6: Start server")
     print(" "*28 + "7: Start sniffer")
+    print(" "*28 + "8: Read History of Server")
+    print(" "*28 + "9: Menu Ufuk")
 
     print(" "*28 + "0: Afsluiten")
     print()
@@ -52,6 +54,10 @@ while True:
     elif optie_input == '6':
         nsg_server.server()
     elif optie_input == '7':
-            nsg_client.client()
+        nsg_client.client()
+    elif optie_input == '8':
+        nsg_server.history()
+    elif optie_input == '9':
+        menu_Ufuk.menu_ufuk()
     elif optie_input == '0':
         sys.exit(0)
