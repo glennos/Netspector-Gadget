@@ -45,6 +45,7 @@ def snifferformat(packet):
         s_addr = socket.inet_ntoa(iph[8])
         d_addr = socket.inet_ntoa(iph[9])
 
+        # IP Protocol
         if ip_version == 4:
 
             # Now to get the header lenght we use "and" operation to make the

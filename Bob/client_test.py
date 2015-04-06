@@ -10,7 +10,7 @@ def client():
         try:
             s = socket.socket()
 
-            addr = 'localhost'          # input("Geef ip adres op (zoals 192.168.0.1): ")
+            addr = input("Geef ip adres op (zoals 192.168.0.1): ")
             port = 12345
             s.connect((addr, port))
 
