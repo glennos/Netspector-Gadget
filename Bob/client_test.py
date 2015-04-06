@@ -16,7 +16,7 @@ def client():
 
             while True:
                 packets = s.recv(65565)
-                if packets:
+                if packets != port:
                     sniffer_test.snifferformat(packets)
         except KeyboardInterrupt:
             print('\nConnection Closed to', addr, '\n')
