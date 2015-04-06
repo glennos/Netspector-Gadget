@@ -36,7 +36,7 @@ def sniffer(packet, user_dest_port):
     h_size = iph_length + tcph_length * 4
     data_size = len(packet) - h_size
 
-    # # get data from the packet
+    # get data from the packet
     # data = str(packet[h_size:])
 
     if dest_port != user_dest_port:

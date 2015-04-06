@@ -1,11 +1,12 @@
 __author__ = 'Glenn'
 import sys
+import socket
 
 from pip._vendor.distlib.compat import raw_input
 
-from library import network_sniffer
+from library import network_sniffer, nsg_server, nsg_client
 from Glenn import connect_socket_test
-from Bob import menu_Bob, nsg_client, nsg_server
+from Bob import menu_Bob
 
 
 c = "+"
@@ -24,7 +25,7 @@ print("""|      __     _                       _                 ___          _ 
 while True:
     print(c + h*86 + c)
     print()
-    print(" "*28 + "1: Toon IP adressen")
+    print(" "*28 + "1: Toon IP adres")
     print(" "*28 + "2: Test Socket connectie")
     print(" "*28 + "3: Simple Network sniffer")
     print(" "*28 + "4: ")
@@ -38,7 +39,10 @@ while True:
     print(optie_input)
     print(c + h*86 + c)
     if optie_input == '1':
-        print("hoi")
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("google.nl",80))
+        print(s.getsockname()[0])
+        s.close()
     elif optie_input == '2':
         connect_socket_test.connect_socket()
     elif optie_input == '3':
