@@ -311,11 +311,11 @@ def snifferformattofile(packet, address):
                   + ' Source MAC : ' + eth_addr(packet[6:12])
                   + ' Protocol : ' + str(eth_protocol))
             # print(ethernet)
-            writeorappendfile(str(ethernet), ('{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
+            writeorappendfile(str(ethernet), ('library/History/{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
             # listprints.append(ethernet)
 
             if eth_protocol != 8:
-                writeorappendfile(str('\n'), ('{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
+                writeorappendfile(str('\n'), ('library/History/{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
                 # listprints.append('\n')
 
             # Parse IP packets, IP Protocol number = 8
@@ -327,7 +327,7 @@ def snifferformattofile(packet, address):
                       + ' Source Address : ' + str(s_addr)
                       + ' Destination Address : ' + str(d_addr))
                 # print(ip)
-                writeorappendfile(str(ip), ('{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
+                writeorappendfile(str(ip), ('library/History/{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
                 # listprints.append(ip)
 
                 # IP Protocol
@@ -346,7 +346,7 @@ def snifferformattofile(packet, address):
                           + ' Destination Address : ' + str(ip_d_addr)
                           )
                     # print(data)
-                    writeorappendfile(str(data), ('{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
+                    writeorappendfile(str(data), ('library/History/{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
                     # listprints.append(data)
 
                 # TCP protocol
@@ -357,7 +357,7 @@ def snifferformattofile(packet, address):
                           + ' Acknowledgement : ' + str(acknowledgement)
                           + ' TCP header length : ' + str(tcph_length))
                     # print(tcp)
-                    writeorappendfile(str(tcp), ('{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
+                    writeorappendfile(str(tcp), ('library/History/{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
                     # listprints.append(tcp)
 
                 # ICMP Packets
@@ -366,7 +366,7 @@ def snifferformattofile(packet, address):
                           + ' Code : ' + str(code)
                           + ' Checksum : ' + str(checksum))
                     # print(icmp)
-                    writeorappendfile(str(icmp), ('{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
+                    writeorappendfile(str(icmp), ('library/History/{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
                     # listprints.append(icmp)
 
                 # UDP packets
@@ -376,7 +376,7 @@ def snifferformattofile(packet, address):
                           + ' Length : ' + str(length)
                           + ' Checksum : ' + str(checksum_udp))
                     # print(udp)
-                    writeorappendfile(str(udp), ('{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
+                    writeorappendfile(str(udp), ('library/History/{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
 
                 # IPV6
                 elif ip_version == 6:
@@ -390,8 +390,8 @@ def snifferformattofile(packet, address):
                           + ' Destination Address : ' + str(ip_d_addr_ipv6)
                           )
                     # print(ipv6)
-                    writeorappendfile(str(ipv6), ('{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
-        writeorappendfile(str('\n'), ('{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
+                    writeorappendfile(str(ipv6), ('library/History/{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
+        writeorappendfile(str('\n'), ('library/History/{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
     except error:
         # Error dat ik helaas niet heb kunnen oplossen
         print('struct.error: unpack requires a bytes object of length 20')
@@ -411,7 +411,7 @@ def writeorappendfile(sniffer, file, mode):
 
 
 def readfile(file, mode):
-    filepath = ('{0}').format(file)
+    filepath = ('library/History/{0}').format(file)
     if mode == 'r':
         file = open(filepath, mode)
         for line in file:
@@ -420,5 +420,5 @@ def readfile(file, mode):
 
 
 def listhistory():
-    for file in os.listdir("History/"):
+    for file in os.listdir("library/History/"):
         print(file)
