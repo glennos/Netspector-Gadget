@@ -300,35 +300,21 @@ def snifferformattofile(packet, address):
         ip_s_addr_ipv6 = iph[6]
         ip_d_addr_ipv6 = iph[7]
 
-        ######################################################################################
-        # Create Tuple from prints
-        listprints = list()
-
         # Hier wordt er een filter toegepast om dest_port 12345 niet te laten zien in de sniffer
         # Ethernet header
         if dest_port != 12345:
             ethernet = ('Destination MAC : ' + eth_addr(packet[0:6])
                   + ' Source MAC : ' + eth_addr(packet[6:12])
-                  + ' Protocol : ' + str(eth_protocol))
-            # print(ethernet)
+                  + ' Protocol : ' + str(eth_protocol)
+                  + '\n'
+            )
             writeorappendfile(str(ethernet), ('library/History/{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
-            # listprints.append(ethernet)
 
             if eth_protocol != 8:
-                writeorappendfile(str('\n'), ('library/History/{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
-                # listprints.append('\n')
+                writeorappendfile(str(''), ('library/History/{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
 
             # Parse IP packets, IP Protocol number = 8
             if eth_protocol == 8:
-                ip = ('Version : ' + str(version)
-                      + ' IP Header Length : ' + str(ihl)
-                      + ' TTL : ' + str(ttl)
-                      + ' Protocol : ' + str(protocol)
-                      + ' Source Address : ' + str(s_addr)
-                      + ' Destination Address : ' + str(d_addr))
-                # print(ip)
-                writeorappendfile(str(ip), ('library/History/{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
-                # listprints.append(ip)
 
                 # IP Protocol
                 if ip_version == 4:
@@ -341,46 +327,50 @@ def snifferformattofile(packet, address):
                           + ' Fragment Offset : ' + str(ip_frag_off)
                           + ' TTL : ' + str(ip_ttl)
                           + ' Protocol : ' + str(ip_proto)
-                          + ' Header Checksum : ' + str(ip_checksum)
+                          + ' \nHeader Checksum : ' + str(ip_checksum)
                           + ' Source Address : ' + str(ip_s_addr)
                           + ' Destination Address : ' + str(ip_d_addr)
-                          )
-                    # print(data)
+                          + '\n'
+                    )
                     writeorappendfile(str(data), ('library/History/{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
-                    # listprints.append(data)
 
                 # TCP protocol
                 if protocol == 6:
-                    tcp = ('Source Port : ' + str(source_port)
+                    tcp = ('TCP :'
+                          + 'Source Port : ' + str(source_port)
                           + ' Dest Port : ' + str(dest_port)
                           + ' Sequence Number : ' + str(sequence)
                           + ' Acknowledgement : ' + str(acknowledgement)
-                          + ' TCP header length : ' + str(tcph_length))
-                    # print(tcp)
+                          + ' TCP header length : ' + str(tcph_length)
+                          + '\n'
+                    )
                     writeorappendfile(str(tcp), ('library/History/{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
-                    # listprints.append(tcp)
 
                 # ICMP Packets
                 elif protocol == 1:
-                    icmp = ('Type : ' + str(icmp_type)
+                    icmp = ('ICMP :'
+                          + ' Type : ' + str(icmp_type)
                           + ' Code : ' + str(code)
-                          + ' Checksum : ' + str(checksum))
-                    # print(icmp)
+                          + ' Checksum : ' + str(checksum)
+                          + '\n'
+                    )
                     writeorappendfile(str(icmp), ('library/History/{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
-                    # listprints.append(icmp)
 
                 # UDP packets
                 elif protocol == 17:
-                    udp = ('Source Port : ' + str(source_port_udp)
+                    udp = ('UDP :'
+                          + ' Source Port : ' + str(source_port_udp)
                           + ' Dest Port : ' + str(dest_port_udp)
                           + ' Length : ' + str(length)
-                          + ' Checksum : ' + str(checksum_udp))
-                    # print(udp)
+                          + ' Checksum : ' + str(checksum_udp)
+                          + '\n'
+                    )
                     writeorappendfile(str(udp), ('library/History/{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
 
                 # IPV6
                 elif ip_version == 6:
-                    ipv6 = ('Version : ' + str(ip_version)
+                    ipv6 = ('IPV6 :'
+                          + 'Version : ' + str(ip_version)
                           + ' Traffic Class ' + str(ip_trafficclass)
                           + ' Flow Label : ' + str(ip_flowlabel)
                           + ' Payload Length : ' + str(ip_payloadlength)
@@ -388,8 +378,8 @@ def snifferformattofile(packet, address):
                           + ' Hop Limit : ' + str(ip_hoplimit)
                           + ' Source Address : ' + str(ip_s_addr_ipv6)
                           + ' Destination Address : ' + str(ip_d_addr_ipv6)
-                          )
-                    # print(ipv6)
+                          + '\n'
+                    )
                     writeorappendfile(str(ipv6), ('library/History/{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
         writeorappendfile(str('\n'), ('library/History/{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
     except error:
@@ -401,24 +391,34 @@ def snifferformattofile(packet, address):
 def writeorappendfile(sniffer, file, mode):
     # w = write and replace file content
     # a = append
-    if mode == 'w':
-        file = open(file, mode)
-        file.write(sniffer)
-    elif mode == 'a':
-        file = open(file, mode)
-        file.write(sniffer)
-    file.close()
+    try:
+        if mode == 'w':
+            file = open(file, mode)
+            file.write(sniffer)
+        elif mode == 'a':
+            file = open(file, mode)
+            file.write(sniffer)
+        file.close()
+    except:
+        print('An error has occurred')
 
 
 def readfile(file, mode):
-    filepath = ('library/History/{0}').format(file)
-    if mode == 'r':
-        file = open(filepath, mode)
-        for line in file:
-            print(line)
-    file.close()
+    try:
+        filepath = ('library/History/{0}').format(file)
+        if mode == 'r':
+            file = open(filepath, mode)
+            for line in file:
+                print(line)
+        file.close()
+    except:
+        print('An error has occurred')
 
 
 def listhistory():
-    for file in os.listdir("library/History/"):
-        print(file)
+    try:
+        for file in os.listdir("library/History/"):
+            if not file.startswith('__'):
+                print(file)
+    except:
+        print('An error has occurred')

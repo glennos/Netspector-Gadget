@@ -11,7 +11,7 @@ from Bob import menu_Bob, nsg_client, nsg_server
 
 def menu_server():
     while True:
-        print(c + h*78 + c)
+        print(c + h*86 + c)
         print(" "*28 + "1: Start Server")
         print(" "*28 + "2: List all History")
         print(" "*28 + "3: Read a History File")
@@ -20,7 +20,7 @@ def menu_server():
         print()
         optie_input = raw_input(" "*28 + "Kies een optie: ",)
         print(optie_input)
-        print(c + h*78 + c)
+        print(c + h*86 + c)
         if optie_input == '1':
             server.server()
         if optie_input == '2':
@@ -28,6 +28,42 @@ def menu_server():
         if optie_input == '3':
             host = input("Geef de bestandsnaam op (zoals 192.168.0.108_52325): ")
             functions.readfile(host, 'r')
+        elif optie_input == '0':
+            menu()
+
+
+def menu():
+    while True:
+        print(c + h*86 + c)
+        print()
+        print(" "*28 + "|-+-+-+-+-+-+-+-+-+-+-+-+-+-+-|")
+        print(" "*28 + "+   1: Toon IP adres          +")
+        print(" "*28 + "|   2: Test Socket connectie  |")
+        print(" "*28 + "+   3: Simple Network sniffer |")
+        print(" "*28 + "|-+-+-+-+-+-+-+-+-+-+-+-+-+-+-|")
+        print(" "*28 + "|   4: Server                 |")
+        print(" "*28 + "|   5: Start sniffer          |")
+        print(" "*28 + "|-+-+-+-+-+-+-+-+-+-+-+-+-+-+-|")
+        print(" "*28 + "|   0: Afsluiten              |")
+        print(" "*28 + "|-+-+-+-+-+-+-+-+-+-+-+-+-+-+-|")
+        print()
+        optie_input = raw_input(" "*28 + "Kies een optie: ",)
+        print(optie_input)
+        print(c + h*86 + c)
+        if optie_input == '1':
+            get_ipadresses.show_ipadresses()
+            # s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            # s.connect(("google.nl",80))
+            # print(s.getsockname()[0])
+            # s.close()
+        elif optie_input == '2':
+            connect_socket_test.connect_socket()
+        elif optie_input == '3':
+            network_sniffer.sniffer()
+        elif optie_input == '4':
+            menu_server()
+        elif optie_input == '5':
+            client.client()
         elif optie_input == '0':
             sys.exit(0)
 
@@ -44,36 +80,5 @@ print("""|      __     _                       _                 ___          _ 
 | \_\ \/ \___|\__|___/ .__/ \___|\___|\__\___/|_|    \____/\__,_|\__,_|\__, |\___|\__| |
 |                    |_|                                               |___/           |""")
 
-while True:
-    print(c + h*86 + c)
-    print()
-    print(" "*28 + "|-+-+-+-+-+-+-+-+-+-+-+-+-+-+-|")
-    print(" "*28 + "+   1: Toon IP adres          +")
-    print(" "*28 + "|   2: Test Socket connectie  |")
-    print(" "*28 + "+   3: Simple Network sniffer |")
-    print(" "*28 + "|-+-+-+-+-+-+-+-+-+-+-+-+-+-+-|")
-    print(" "*28 + "|   4: Start server           |")
-    print(" "*28 + "|   5: Start sniffer          |")
-    print(" "*28 + "|-+-+-+-+-+-+-+-+-+-+-+-+-+-+-|")
-    print(" "*28 + "|   0: Afsluiten              |")
-    print(" "*28 + "|-+-+-+-+-+-+-+-+-+-+-+-+-+-+-|")
-    print()
-    optie_input = raw_input(" "*28 + "Kies een optie: ",)
-    print(optie_input)
-    print(c + h*86 + c)
-    if optie_input == '1':
-        get_ipadresses.show_ipadresses()
-        # s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        # s.connect(("google.nl",80))
-        # print(s.getsockname()[0])
-        # s.close()
-    elif optie_input == '2':
-        connect_socket_test.connect_socket()
-    elif optie_input == '3':
-        network_sniffer.sniffer()
-    elif optie_input == '4':
-        menu_server()
-    elif optie_input == '5':
-        client.client()
-    elif optie_input == '0':
-        sys.exit(0)
+
+menu()
