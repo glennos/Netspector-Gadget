@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-from __future__ import print_function
 __author__ = 'root'
 
 from pip._vendor.distlib.compat import raw_input
@@ -57,7 +56,6 @@ def sniffer(remote, user_dest_port, address):
     # get data from the packet
     data = str(packet[h_size:])
 
-    # file = open('client_history', 'a')
     if dest_port != user_dest_port:
         tcppacket = (''
                      + 'Source Port : ' + str(source_port)
@@ -69,22 +67,18 @@ def sniffer(remote, user_dest_port, address):
                      )
         hostipaddress = address[0]
         hostipport = address[1]
-        writeorreadfile(tcppacket, ('History/{0}_{1}'.format(hostipaddress, hostipport)), 'a')
+        writeorappendfile(tcppacket, ('History/{0}_{1}'.format(hostipaddress, hostipport)), 'a')
 
 
-def writeorreadfile(sniffer, file, mode):
+def writeorappendfile(sniffer, file, mode):
     # w = write and replace file content
     # a = append
-    # r = read
     if mode == 'w':
         file = open(file, mode)
         file.write(sniffer)
     elif mode == 'a':
         file = open(file, mode)
         file.write(sniffer)
-    # elif mode == 'r':
-    #     file = open(file, mode)
-    #     file.read()
     file.close()
 
 
@@ -94,34 +88,12 @@ def readfile(file, mode):
         file = open(filepath, mode)
         for line in file:
             print(line)
+    file.close()
 
 
 def listhistory():
     for file in os.listdir("History/"):
         print(file)
-
-
-def history():
-    c = "+"
-    h = "-"
-    x = True
-
-    while True:
-        print(c + h*86 + c)
-        print()
-        print(" "*28 + "1: Show list of files")
-        print(" "*28 + "2: Read History")
-        print(" "*28 + "0: Afsluiten")
-        print()
-        optie_input = raw_input(" "*28 + "Kies een optie: ",)
-        print(optie_input)
-        print(c + h*86 + c)
-        if optie_input == '1':
-            listhistory()
-        elif optie_input == '2':
-            print("")
-        elif optie_input == '0':
-            sys.exit(0)
 
 
 def server():
