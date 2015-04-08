@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-__author__ = 'Bob Korthals'
+__author__ = 'Bob Korthals, Ufuk Celebi'
 
 from struct import *
 import socket
@@ -409,7 +409,7 @@ def readfile(file, mode):
         if mode == 'r':
             file = open(filepath, mode)
             for line in file:
-                print(line)
+                print(line, end="")
         file.close()
     except:
         print('An error has occurred')

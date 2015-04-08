@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-__author__ = 'Bob Korthals'
+__author__ = 'Bob Korthals, Ufuk Celebi'
 
 
 import socket
