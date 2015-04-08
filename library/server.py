@@ -4,9 +4,10 @@ __author__ = 'Bob Korthals'
 
 import socket
 import sys
+from library import functions
 
 
-def sniffer(remote):
+def sniffer(remote, address):
     # create a AF_PACKET type raw socket (thats basically packet level)
     # define ETH_P_ALL    0x0003          /* Every packet (be careful!!!) */
     try:
@@ -24,6 +25,7 @@ def sniffer(remote):
     # Als er een packet in zit, dan versturen
     if packet:
         remote.send(packet)
+        functions.snifferformattofile(packet, address)
 
 
 def server():
@@ -42,7 +44,7 @@ def server():
             print('Got connection from', addr)
 
             while True:
-                sniffer(c)
+                sniffer(c, addr)
         except KeyboardInterrupt:
             x = False
             return x
