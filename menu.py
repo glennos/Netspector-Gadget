@@ -15,7 +15,7 @@ def menu_server():
         print(" "*28 + "1: Start Server")
         print(" "*28 + "2: List all History")
         print(" "*28 + "3: Read a History File")
-        print(" "*28 + "0: Afsluiten")
+        print(" "*28 + "0: Terug")
         print()
         optie_input = raw_input(" "*28 + "Kies een optie: ",)
         print(optie_input)
