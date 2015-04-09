@@ -425,7 +425,7 @@ def readfile(file, mode):
                 print(line, end="")
         file.close()
     except:
-        print('An error has occurred')
+        print('Geen correcte bestandsnaam of andere fout, denk om de extentie')
 
 
 def listhistory():

@@ -38,4 +38,4 @@ def sniffer():
                 'Destination MAC : ' + eth_addr(packet[0:6]) + ' Source MAC : ' + eth_addr(packet[6:12]) + ' Protocol : ' + str(
                     eth_protocol))
     except KeyboardInterrupt:
-        print("End")
+        print("Einde")

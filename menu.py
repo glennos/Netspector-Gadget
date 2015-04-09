@@ -11,8 +11,8 @@ def menu_server():
         print()
         print(" "*28 + c + h*29 + c)
         print(" "*28 + "|   1: Start server           |")
-        print(" "*28 + "|   2: List all History       |")
-        print(" "*28 + "|   3: Read a History File    |")
+        print(" "*28 + "|   2: Laat geschiedenis zien |")
+        print(" "*28 + "|   3: Lees een bestand in    |")
         print(" "*28 + c + h*29 + c)
         print(" "*28 + "|   0: Terug                  |")
         print(" "*28 + c + h*29 + c)
@@ -25,6 +25,7 @@ def menu_server():
         if optie_input == '2':
             functions.listhistory()
         if optie_input == '3':
+            print('Gebruik optie 2 om te zien wat er ingelezen kan worden')
             host = input("Geef de bestandsnaam op (zoals 192.168.0.108_52325.txt): ")
             functions.readfile(host, 'r')
         elif optie_input == '0':
@@ -41,10 +42,10 @@ def menu():
         print(" "*28 + c + h*29 + c)
         print(" "*28 + "|   1: Toon IP adressen       |")
         print(" "*28 + "|   2: Test Socket connectie  |")
-        print(" "*28 + "|   3: Simple network sniffer |")
+        print(" "*28 + "|   3: Simple Network Sniffer |")
         print(" "*28 + c + h*29 + c)
         print(" "*28 + "|   4: Server                 |")
-        print(" "*28 + "|   5: Start netwerk sniffer  |")
+        print(" "*28 + "|   5: Start Client           |")
         print(" "*28 + c + h*29 + c)
         print(" "*28 + "|   0: Afsluiten              |")
         print(" "*28 + c + h*29 + c)

@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
-import socket
+from os import error
 from library import functions
+import socket
 
 
 def client():
@@ -18,9 +19,13 @@ def client():
                 packets = s.recv(65565)
                 if packets:
                     functions.snifferformat(packets)
+
         except KeyboardInterrupt:
-            print('\nConnectie gesloten naar', addr, '\n')
+            print('Connectie gesloten')
             x = False
             return x
+
+        except error:
+            print('Foutieve invoer')
         finally:
             s.close()

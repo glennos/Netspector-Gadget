@@ -16,6 +16,3 @@ def show_ipadresses():
 
         # format de print zodat er een interface + ip adres op het scherm komt
         print("%s: %s" % (ifaceName, " ".join(addresses)))
-
-    print("")
-    print(ifaceName, "", (addresses))

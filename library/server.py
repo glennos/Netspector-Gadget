@@ -42,11 +42,19 @@ def server():
             c, addr = s.accept()
             print('Heeft connectie vanaf', addr)
 
-            while True:
-                sniffer(c, addr)
+            y = True
+            while y is True:
+                try:
+                    sniffer(c, addr)
+
+                except KeyboardInterrupt:
+                    print('Einde')
+                    y = False
+                    return y
 
         # Aantal error handlers
         except KeyboardInterrupt:
+            print('Einde')
             x = False
             return x
         except BrokenPipeError:
