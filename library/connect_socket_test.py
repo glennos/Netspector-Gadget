@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-__author__ = 'Glenn'
+
 import socket  # for sockets
 import sys  # for exit
+
 
 # Function connect_socket()
 def connect_socket():

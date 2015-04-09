@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-__author__ = 'Bob Korthals, Ufuk Celebi'
 
 import socket
 from library import functions
+
 
 def client():
     x = True

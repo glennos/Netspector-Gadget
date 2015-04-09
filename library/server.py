@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-__author__ = 'Bob Korthals, Ufuk Celebi'
-
 
 import socket
 import sys
@@ -54,7 +52,3 @@ def server():
             print('Connection Closed from', addr)
         finally:
             s.close()
-
-
-
-

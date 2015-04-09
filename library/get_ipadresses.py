@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-__author__ = 'Glenn'
+
 import netifaces
+
 
 def show_ipadresses():
 

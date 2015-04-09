@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-__author__ = 'Glenn'
+
 import sys
 from pip._vendor.distlib.compat import raw_input
 from library import network_sniffer, client, server, functions, get_ipadresses, connect_socket_test
