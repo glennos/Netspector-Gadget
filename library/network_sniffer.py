@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from struct import *
 import socket
 import sys
