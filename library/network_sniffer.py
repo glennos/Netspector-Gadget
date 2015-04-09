@@ -18,7 +18,7 @@ def sniffer():
             s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(0x0003))
         except socket.error as msg:
             msg = list(msg)
-            print('Socket kon niet worden opgebouwd. Fout Code : ' + str(msg[0]) + ' bericht ' + msg[1])
+            print('Socket kon niet worden opgebouwd. Fout Code : ' + str(msg[0]) + ' Bericht ' + msg[1])
             sys.exit()
 
         # Pakketjes ontvangen

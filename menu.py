@@ -30,7 +30,8 @@ def menu_server():
         elif optie_input == '0':
             menu()
         else:
-            print("Geen geldige keuze")
+            if not optie_input == '2':
+                print("Geen geldige keuze")
 
 
 def menu():

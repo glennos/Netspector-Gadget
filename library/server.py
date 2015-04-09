@@ -11,7 +11,7 @@ def sniffer(remote, address):
     try:
         so = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(0x0003))
     except socket.error as msg:
-        print('Socket could not be created. Error Code : ' + str(msg[0]) + ' Message ' + msg[1])
+        print('Socket kon niet worden opgebouwd. Fout Code : ' + str(msg[0]) + ' Bericht ' + msg[1])
         sys.exit()
 
     # Pakketjes ontvangen
@@ -29,6 +29,7 @@ def sniffer(remote, address):
 def server():
     x = True
     while x is True:
+        print('Server is aan het luisteren')
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -39,7 +40,7 @@ def server():
 
             s.listen(5)
             c, addr = s.accept()
-            print('Got connection from', addr)
+            print('Heeft connectie vanaf', addr)
 
             while True:
                 sniffer(c, addr)
@@ -49,8 +50,8 @@ def server():
             x = False
             return x
         except BrokenPipeError:
-            print('Connection Closed from', addr)
+            print('Connectie gesloten vanaf', addr)
         except ConnectionResetError:
-            print('Connection Closed from', addr)
+            print('Connectie gesloten vanaf', addr)
         finally:
             s.close()

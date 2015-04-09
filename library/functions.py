@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from struct import *
+from time import gmtime, strftime
 import socket
 import os
 
@@ -116,6 +117,10 @@ def snifferformat(packet):
 
         # Hier wordt er een filter toegepast om dest_port 12345 niet te laten zien in de sniffer
         if dest_port != 12345:
+
+            # Haalt tijd op en print deze op het scherm
+            print(strftime("%Y-%m-%d %H:%M:%S"))
+
             print('Destination MAC : ' + eth_addr(packet[0:6])
                   + ' Source MAC : ' + eth_addr(packet[6:12])
                   + ' Protocol : ' + str(eth_protocol))
@@ -302,11 +307,20 @@ def snifferformattofile(packet, address):
         # Hier wordt er een filter toegepast om dest_port 12345 niet te laten zien in de sniffer
         # Ethernet header
         if dest_port != 12345:
-            ethernet = ('Destination MAC : ' + eth_addr(packet[0:6])
+
+            # Haalt tijd op en stop deze in variabele
+            the_time = (strftime("%Y-%m-%d %H:%M:%S"))
+
+            ethernet = (the_time + '\n' + 'Destination MAC : ' + eth_addr(packet[0:6])
                   + ' Source MAC : ' + eth_addr(packet[6:12])
                   + ' Protocol : ' + str(eth_protocol)
                   + '\n'
             )
+
+            # Checkt of directory bestaat en maakt hem anders aan
+            if not os.path.exists('library/History/'):
+                os.makedirs('library/History/')
+
             writeorappendfile(str(ethernet), ('library/History/{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
 
             if eth_protocol != 8:
