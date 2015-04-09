@@ -383,7 +383,7 @@ def snifferformattofile(packet, address):
                     writeorappendfile(str(ipv6), ('library/History/{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
         writeorappendfile(str('\n'), ('library/History/{0}_{1}.txt'.format(hostipaddress, hostipport)), 'a')
     except error:
-        # Error dat ik helaas niet heb kunnen oplossen
+        # Afvangen van een error die voorkomt wanneer de header langer dan 20 is
         print('struct.error: unpack requires a bytes object of length 20')
         print()
 

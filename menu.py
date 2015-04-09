@@ -1,13 +1,8 @@
 #!/usr/bin/env python3
 __author__ = 'Glenn'
 import sys
-import socket
-
 from pip._vendor.distlib.compat import raw_input
-
-from library import network_sniffer, client, server, functions, get_ipadresses
-from Glenn import connect_socket_test
-from Bob import menu_Bob, nsg_client, nsg_server
+from library import network_sniffer, client, server, functions, get_ipadresses, connect_socket_test
 
 
 def menu_server():
@@ -43,12 +38,12 @@ def menu():
         print(c + h*86 + c)
         print()
         print(" "*28 + c + h*29 + c)
-        print(" "*28 + "|   1: Toon IP adres          |")
+        print(" "*28 + "|   1: Toon IP adressen       |")
         print(" "*28 + "|   2: Test Socket connectie  |")
-        print(" "*28 + "|   3: Simple Network sniffer |")
+        print(" "*28 + "|   3: Simple network sniffer |")
         print(" "*28 + c + h*29 + c)
         print(" "*28 + "|   4: Server                 |")
-        print(" "*28 + "|   5: Start sniffer          |")
+        print(" "*28 + "|   5: Start netwerk sniffer  |")
         print(" "*28 + c + h*29 + c)
         print(" "*28 + "|   0: Afsluiten              |")
         print(" "*28 + c + h*29 + c)
