@@ -30,9 +30,12 @@ def menu_server():
         if optie_input == '2':
             functions.listhistory()
         if optie_input == '3':
-            print('Gebruik optie 2 om te zien wat er ingelezen kan worden')
-            host = input("Geef de bestandsnaam op (zoals 192.168.0.108_52325.txt): ")
-            functions.readfile(host, 'r')
+            try:
+                print('Gebruik optie 2 om te zien wat er ingelezen kan worden')
+                host = input("Geef de bestandsnaam op (zoals 192.168.0.108_52325.txt): ")
+                functions.readfile(host, 'r')
+            except KeyboardInterrupt:
+                print('Einde')
         elif optie_input == '0':
             menu()
         else:
