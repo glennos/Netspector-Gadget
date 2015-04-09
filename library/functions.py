@@ -7,7 +7,7 @@ import os
 
 def snifferformat(packet):
     try:
-        # Convert a string of 6 characters of ethernet address into a dash separated hex string
+        # formatting voor het mac adress
         def eth_addr(a):
             b = "%.2x:%.2x:%.2x:%.2x:%.2x:%.2x" % (a[0], a[1], a[2], a[3], a[4], a[5])
             return b
@@ -181,7 +181,7 @@ def snifferformat(packet):
                           )
                 print()
     except error:
-        # Error dat ik helaas niet heb kunnen oplossen
+        # Afvangen van een error die voorkomt wanneer de header langer dan 20 is
         print('struct.error: unpack requires a bytes object of length 20')
         print()
 

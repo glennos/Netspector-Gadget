@@ -19,7 +19,7 @@ def client():
                 if packets:
                     functions.snifferformat(packets)
         except KeyboardInterrupt:
-            print('\nConnection Closed to', addr, '\n')
+            print('\nConnectie gesloten naar', addr, '\n')
             x = False
             return x
         finally:

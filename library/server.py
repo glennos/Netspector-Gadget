@@ -6,18 +6,18 @@ from library import functions
 
 
 def sniffer(remote, address):
-    # create a AF_PACKET type raw socket (thats basically packet level)
-    # define ETH_P_ALL    0x0003          /* Every packet (be careful!!!) */
+    # Maakt AF_PACKET type raw socket (packet niveau)
+    # ETH_P_ALL    0x0003 (alle paketten)
     try:
         so = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(0x0003))
     except socket.error as msg:
         print('Socket could not be created. Error Code : ' + str(msg[0]) + ' Message ' + msg[1])
         sys.exit()
 
-    # receive a packet
+    # Pakketjes ontvangen
     packet = so.recvfrom(65565)
 
-    # create string
+    # Van een tuple naar een string
     packet = packet[0]
 
     # Als er een packet in zit, dan versturen
@@ -33,8 +33,8 @@ def server():
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-            host = '0.0.0.0'        # Bind to any address
-            port = 12345
+            host = '0.0.0.0'        # Koppelen aan een adres
+            port = 12345            # Poort waarop de socket bereikbaar is
             s.bind((host, port))
 
             s.listen(5)
@@ -43,6 +43,8 @@ def server():
 
             while True:
                 sniffer(c, addr)
+
+        # Aantal error handlers
         except KeyboardInterrupt:
             x = False
             return x

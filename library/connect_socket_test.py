@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 
-import socket  # for sockets
-import sys  # for exit
+import socket
+import sys
 
 
-# Function connect_socket()
 def connect_socket():
     try:
-        # create an AF_INET, STREAM socket (TCP)
+        # Maakt een AF_INET, STREAM socket (TCP)
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     except socket.error as msg:
-        print('Failed to create socket. Error code: ' + str(msg[0]) + ' , Error message : ' + msg[1])
+        print('Het is niet gelukt om een socket op te bouwen. Fout code: ' + str(msg[0]) + ' , Error message : ' + msg[1])
         sys.exit()
 
     print("Socket Created")
@@ -22,13 +21,13 @@ def connect_socket():
         remote_ip = socket.gethostbyname(host)
 
     except socket.gaierror:
-        # could not resolve
-        print('Hostname could not be resolved. Exiting')
+        # resolve error
+        print('Naam (hostname) kon niet worden vertaald')
         sys.exit()
 
-    print('Ip address of ' + host + ' is ' + remote_ip)
+    print('Ip address van ' + host + ' is ' + remote_ip)
 
     # Connect to remote server
     s.connect((remote_ip, port))
 
-    print('Socket Connected to ' + host + ' on ip ' + remote_ip)
+    print('Socket Connected naar ' + host + ' op ip ' + remote_ip)
