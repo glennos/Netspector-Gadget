@@ -12,10 +12,14 @@ from Bob import menu_Bob, nsg_client, nsg_server
 def menu_server():
     while True:
         print(c + h*86 + c)
-        print(" "*28 + "1: Start Server")
-        print(" "*28 + "2: List all History")
-        print(" "*28 + "3: Read a History File")
-        print(" "*28 + "0: Terug")
+        print()
+        print(" "*28 + c + h*29 + c)
+        print(" "*28 + "|   1: Start server           |")
+        print(" "*28 + "|   2: List all History       |")
+        print(" "*28 + "|   3: Read a History File    |")
+        print(" "*28 + c + h*29 + c)
+        print(" "*28 + "|   0: Terug                  |")
+        print(" "*28 + c + h*29 + c)
         print()
         optie_input = raw_input(" "*28 + "Kies een optie: ",)
         print(optie_input)
@@ -25,32 +29,35 @@ def menu_server():
         if optie_input == '2':
             functions.listhistory()
         if optie_input == '3':
-            host = input("Geef de bestandsnaam op (zoals 192.168.0.108_52325): ")
+            host = input("Geef de bestandsnaam op (zoals 192.168.0.108_52325.txt): ")
             functions.readfile(host, 'r')
         elif optie_input == '0':
             menu()
+        else:
+            print("Geen geldige keuze")
 
 
 def menu():
     while True:
         print(c + h*86 + c)
         print()
-        print(" "*28 + "|-+-+-+-+-+-+-+-+-+-+-+-+-+-+-|")
-        print(" "*28 + "+   1: Toon IP adres          +")
+        print(" "*28 + c + h*29 + c)
+        print(" "*28 + "|   1: Toon IP adres          |")
         print(" "*28 + "|   2: Test Socket connectie  |")
-        print(" "*28 + "+   3: Simple Network sniffer |")
-        print(" "*28 + "|-+-+-+-+-+-+-+-+-+-+-+-+-+-+-|")
+        print(" "*28 + "|   3: Simple Network sniffer |")
+        print(" "*28 + c + h*29 + c)
         print(" "*28 + "|   4: Server                 |")
         print(" "*28 + "|   5: Start sniffer          |")
-        print(" "*28 + "|-+-+-+-+-+-+-+-+-+-+-+-+-+-+-|")
+        print(" "*28 + c + h*29 + c)
         print(" "*28 + "|   0: Afsluiten              |")
-        print(" "*28 + "|-+-+-+-+-+-+-+-+-+-+-+-+-+-+-|")
+        print(" "*28 + c + h*29 + c)
         print()
         optie_input = raw_input(" "*28 + "Kies een optie: ",)
         print(optie_input)
         print(c + h*86 + c)
         if optie_input == '1':
             get_ipadresses.show_ipadresses()
+            # Oude check IP adres
             # s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             # s.connect(("google.nl",80))
             # print(s.getsockname()[0])
@@ -65,6 +72,8 @@ def menu():
             client.client()
         elif optie_input == '0':
             sys.exit(0)
+        else:
+            print("Geen geldige keuze")
 
 c = "+"
 h = "-"
