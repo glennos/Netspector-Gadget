@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 
+# Auteurs
+# Ufuk Celebi
+# Bob Korthals
+# Glenn de Rijk
+
 import sys
 from pip._vendor.distlib.compat import raw_input
 from library import network_sniffer, client, server, functions, get_ipadresses, connect_socket_test
